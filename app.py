@@ -12,7 +12,10 @@ def Home():
 
 @flask_app.route("/predict", methods = ["POST"])
 def predict():
-    float_features = [float(x) for x in request.form.values()]
+    columns = ['Age',	'Body Temperature',	'Fatigue',	'Cough',	'Body Pains',	'SoreThroat',	'Breathing Difficulty']
+    
+    float_features = [float(request.form.get(col)) for col in columns]
+
     features = [np.array(float_features)]
     prediction = model.predict(features)
     
